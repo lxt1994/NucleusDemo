@@ -1,10 +1,8 @@
 package cn.lxt.nucleusdemo.api;
 
-import java.util.Map;
-
 import cn.lxt.nucleusdemo.response.LoginResponse;
 import io.reactivex.Observable;
-import retrofit2.http.FieldMap;
+import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
@@ -16,6 +14,6 @@ public interface Service {
 
     @FormUrlEncoded
     @POST("user/login")
-    Observable<LoginResponse> Login(@FieldMap Map<String, String> map);
+    Observable<LoginResponse> login(@Field("mobile") String mobile, @Field("loginPassword") String loginPassword);
 
 }

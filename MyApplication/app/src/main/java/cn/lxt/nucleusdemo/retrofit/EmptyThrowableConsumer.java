@@ -1,8 +1,6 @@
 package cn.lxt.nucleusdemo.retrofit;
 
 import android.content.Context;
-import android.util.Log;
-import android.view.Gravity;
 import android.widget.Toast;
 
 import io.reactivex.annotations.NonNull;
@@ -26,9 +24,8 @@ public class EmptyThrowableConsumer implements Consumer<Throwable> {
 
     @Override
     public void accept(@NonNull Throwable throwable) throws Exception {
-//        Log.e("EmptyThrowableConsumer", "throwable=== >" + throwable.toString());
-        if(context != null){
-            Toast.makeText(context, "网络异常", Toast.LENGTH_LONG, Gravity.CENTER).show();
+        if (context != null) {
+            Toast.makeText(context, "网络异常", Toast.LENGTH_LONG).show();
         }
     }
 }

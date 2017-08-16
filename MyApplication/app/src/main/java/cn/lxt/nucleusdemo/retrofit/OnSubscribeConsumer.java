@@ -30,8 +30,8 @@ public class OnSubscribeConsumer implements Consumer<Disposable> {
 
     @Override
     public void accept(@NonNull Disposable o) throws Exception {
-        if(context != null && context instanceof BaseActivity){
-            if(!TextUtils.isEmpty(msg)){
+        if (context != null && context instanceof BaseActivity) {
+            if (!TextUtils.isEmpty(msg)) {
                 ((BaseActivity) context).showProgressDialog(true, msg, cancelbale);
             }
         }

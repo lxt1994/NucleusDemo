@@ -5,14 +5,14 @@ package cn.lxt.nucleusdemo.response;
  */
 
 public class BaseResponse {
-    private int code;
+    private Integer code;
     private String msg;
 
-    public int getCode() {
+    public Integer getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(Integer code) {
         this.code = code;
     }
 

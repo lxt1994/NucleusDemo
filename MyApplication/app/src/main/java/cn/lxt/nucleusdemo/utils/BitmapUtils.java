@@ -18,6 +18,7 @@ import java.util.Date;
  */
 
 public class BitmapUtils {
+    private static SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
 
     public static File compressImage(String path, String name) {
         // 获得图片的宽和高，并不把图片加载到内存中
@@ -35,7 +36,6 @@ public class BitmapUtils {
             bitmap.compress(Bitmap.CompressFormat.JPEG, quality, baos);//这里压缩options%，把压缩后的数据存放到baos中
         }
         if (TextUtils.isEmpty(name)) {
-            SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
             Date date = new Date(System.currentTimeMillis());
             name = format.format(date);
         }

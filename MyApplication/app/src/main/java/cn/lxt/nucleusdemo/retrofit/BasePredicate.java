@@ -32,31 +32,29 @@ public class BasePredicate<R extends BaseResponse> implements Predicate<R> {
     @Override
     public boolean test(@NonNull final R r) throws Exception {
         boolean result = false;
-        if(r != null){
-            if(r.getCode() == 0){
+        if (r != null) {
+            if (r.getCode() == 0) {
                 result = true;
-            }
-            else if(r.getCode() == 23003){
-                ((Activity)context).runOnUiThread(new Runnable() {
+            } else if (r.getCode() == 23003) {
+                ((Activity) context).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         //这边可以自己做一些本地化操作
-                        if(finishOnError){
+                        if (finishOnError) {
                             ((Activity) context).finish();
                         }
                     }
                 });
-            }
-            else {
-                if(!TextUtils.isEmpty(error))
-                    ((Activity)context).runOnUiThread(new Runnable() {
+            } else {
+                if (!TextUtils.isEmpty(error))
+                    ((Activity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             Toast.makeText(context, !TextUtils.isEmpty(r.getMsg()) ? r.getMsg() : error, Toast.LENGTH_SHORT);
                         }
                     });
-                if(finishOnError){
-                    ((Activity)context).runOnUiThread(new Runnable() {
+                if (finishOnError) {
+                    ((Activity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             ((Activity) context).finish();
@@ -64,17 +62,16 @@ public class BasePredicate<R extends BaseResponse> implements Predicate<R> {
                     });
                 }
             }
-        }
-        else {
-            if(!TextUtils.isEmpty(error))
-                ((Activity)context).runOnUiThread(new Runnable() {
+        } else {
+            if (!TextUtils.isEmpty(error))
+                ((Activity) context).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         Toast.makeText(context, r != null && !TextUtils.isEmpty(r.getMsg()) ? r.getMsg() : error, Toast.LENGTH_SHORT);
                     }
                 });
-            if(finishOnError){
-                ((Activity)context).runOnUiThread(new Runnable() {
+            if (finishOnError) {
+                ((Activity) context).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         ((Activity) context).finish();

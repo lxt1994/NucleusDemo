@@ -23,8 +23,8 @@ public class HttpUtil {
     //SSL证书
     private static int[] certs = new int[]{R.raw.server};
 
-    public static Retrofit getRetrofit(Context context){
-        if(retrofit == null){
+    public static Retrofit getRetrofit(Context context) {
+        if (retrofit == null) {
             Retrofit.Builder retrofitBuilder = new Retrofit.Builder();
             retrofitBuilder.baseUrl(IpConstants.BASE_URL);
             retrofitBuilder.addConverterFactory(ScalarsConverterFactory.create());
@@ -32,20 +32,16 @@ public class HttpUtil {
             retrofitBuilder.addCallAdapterFactory(RxJava2CallAdapterFactory.create());
             OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
             clientBuilder.cookieJar(new CookiesManager(context));
-//            if(Constants.SERVER_URL.equals("https://xyzc.kongapi.com")) {
-//                HostnameVerifier hostnameVerifier = HttpsFactroy.getHostnameVerifier(hosts);
-//                    okHttpClientBuilder.hostnameVerifier(hostnameVerifier);
-                SSLSocketFactory sslSocketFactory = null;
-                try {
-                    sslSocketFactory = HttpsFactroy.getSSLSocketFactory(context, certs);
-                } catch (Exception e) {
-                    sslSocketFactory = null;
-                }
-                if (sslSocketFactory != null) {
-                    sslSocketFactory.getDefaultCipherSuites();
-                    clientBuilder.sslSocketFactory(sslSocketFactory);
-                }
-//            }
+            SSLSocketFactory sslSocketFactory = null;
+            try {
+                sslSocketFactory = HttpsFactroy.getSSLSocketFactory(context, certs);
+            } catch (Exception e) {
+                sslSocketFactory = null;
+            }
+            if (sslSocketFactory != null) {
+                sslSocketFactory.getDefaultCipherSuites();
+                clientBuilder.sslSocketFactory(sslSocketFactory);
+            }
             clientBuilder.connectTimeout(30, TimeUnit.SECONDS);
             clientBuilder.readTimeout(60, TimeUnit.SECONDS);
             retrofitBuilder.client(clientBuilder.build());
@@ -53,16 +49,4 @@ public class HttpUtil {
         }
         return retrofit;
     }
-//    private static String authorization;
-
-//    public static String getAuthorization(Context context) {
-//        if(authorization == null){
-//            long uid = SPUtils.getLong(context, "uid", 0);
-//            String token = SPUtils.getString(context, "token", null);
-//            if(uid > 0 && !TextUtils.isEmpty(token)){
-//                authorization = Base64.encodeToString((uid + ":" + token).getBytes(), Base64.NO_WRAP);
-//            }
-//        }
-//        return authorization;
-//    }
 }

@@ -2,8 +2,6 @@ package cn.lxt.nucleusdemo.presenter;
 
 import android.os.Bundle;
 
-import java.util.HashMap;
-
 import cn.lxt.nucleusdemo.api.Service;
 import cn.lxt.nucleusdemo.base.BasePresenter;
 import cn.lxt.nucleusdemo.bean.LoginBean;
@@ -36,10 +34,7 @@ public class MainActivityPresenter extends BasePresenter<MainActivity> {
             @Override
             public Observable<LoginBean> create() {
                 //这里用自己的rxjava+retrofit做联网请求和一些逻辑处理
-                HashMap<String, String> map = new HashMap<>();
-                map.put("mobile", name);
-                map.put("loginPassword", psw);
-                return HttpUtil.getRetrofit(context).create(Service.class).Login(map)
+                return HttpUtil.getRetrofit(context).create(Service.class).login(name, psw)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .compose(new LoadingTransformer<LoginResponse>(context, "正在登录，请稍候。。。", true))

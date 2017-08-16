@@ -48,8 +48,7 @@ public class HttpsFactroy {
             trustManagerFactory.init(keyStore);
             sslContext.init(null, trustManagerFactory.getTrustManagers(), new SecureRandom());
             return sslContext.getSocketFactory();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
         }
         return null;
     }
@@ -108,7 +107,8 @@ public class HttpsFactroy {
             ssContext.init(keyManagerFactory.getKeyManagers(), trustManagers, null);
             //return (X509TrustManager) trustManagers[0];
             return ssContext.getSocketFactory();
-        }catch (Exception e){}
+        } catch (Exception e) {
+        }
         return null;
     }
 

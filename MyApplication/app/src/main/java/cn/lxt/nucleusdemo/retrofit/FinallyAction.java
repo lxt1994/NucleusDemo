@@ -18,7 +18,7 @@ public class FinallyAction implements Action {
 
     @Override
     public void run() throws Exception {
-        if(context != null && context instanceof BaseActivity){
+        if (context != null && context instanceof BaseActivity) {
             ((BaseActivity) context).showProgressDialog(false, "", false);
         }
     }
