@@ -28,12 +28,20 @@ public abstract class BaseFragment<P extends BasePresenter> extends NucleusFragm
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         if (mView == null) {
             mView = inflater.inflate(getChildResource(), container, false);
-            initView(mView);
         }
         return mView;
     }
 
-    protected abstract void initView(View view);
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initView(mView);
+        initData();
+    }
 
     protected abstract int getChildResource();
+
+    protected abstract void initView(View view);
+
+    protected abstract void initData();
 }

@@ -17,6 +17,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.BiConsumer;
 import io.reactivex.functions.Function;
+import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 import nucleus5.presenter.Factory;
 
@@ -46,6 +47,11 @@ public class MainActivityPresenter extends BasePresenter<MainActivity> {
                         .map(new Function<LoginResponse, LoginBean>() {
                             @Override
                             public LoginBean apply(@NonNull LoginResponse loginResponse) throws Exception {return loginResponse.getData();
+                            }
+                        })
+                        .filter(new Predicate<LoginBean>() {
+                            @Override
+                            public boolean test(@NonNull LoginBean loginBean) throws Exception {return loginBean != null;
                             }
                         });
             }

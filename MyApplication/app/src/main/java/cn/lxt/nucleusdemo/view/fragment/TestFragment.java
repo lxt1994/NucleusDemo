@@ -16,6 +16,11 @@ public class TestFragment extends BaseFragment<TestFragmentPresenter> {
     }
 
     @Override
+    protected void initData() {
+
+    }
+
+    @Override
     protected int getChildResource() {
         return 0;
     }

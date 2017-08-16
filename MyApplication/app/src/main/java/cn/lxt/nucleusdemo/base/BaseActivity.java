@@ -22,6 +22,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends NucleusAppCo
         destroyed = false;
         initView();
         initData();
+        initClick();
     }
 
     protected abstract int getLayout();
@@ -30,28 +31,29 @@ public abstract class BaseActivity<P extends BasePresenter> extends NucleusAppCo
 
     protected abstract void initData();
 
-    public void showProgressDialog(boolean flag, String msg, boolean cancelable){
-        if(destroyed || isFinishing())
+    protected abstract void initClick();
+
+    public void showProgressDialog(boolean flag, String msg, boolean cancelable) {
+        if (destroyed || isFinishing())
             return;
-        if(flag) {
-            if(progressDialog == null) {
+        if (flag) {
+            if (progressDialog == null) {
                 progressDialog = ProgressDialog.show(this, "", msg, false);
                 progressDialog.setCancelable(cancelable);
                 progressDialog.setCanceledOnTouchOutside(false);
                 progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                     @Override
                     public void onCancel(DialogInterface dialogInterface) {
-                        if(finishOnCancel)
+                        if (finishOnCancel)
                             finish();
                     }
                 });
             }
             progressDialog.setMessage(msg);
-            if(!progressDialog.isShowing())
+            if (!progressDialog.isShowing())
                 progressDialog.show();
-        }
-        else {
-            if(progressDialog != null && progressDialog.isShowing()){
+        } else {
+            if (progressDialog != null && progressDialog.isShowing()) {
                 progressDialog.dismiss();
             }
         }
@@ -61,7 +63,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends NucleusAppCo
     protected void onDestroy() {
         super.onDestroy();
         destroyed = true;
-        if(progressDialog != null && progressDialog.isShowing()){
+        if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();
         }
     }
